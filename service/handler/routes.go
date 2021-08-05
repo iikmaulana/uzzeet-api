@@ -20,9 +20,11 @@ func (ox gatewayHandler) initRoute() {
 	ox.service.GET("/gpstype/view/{id}", ox.getGpstypeById)
 	ox.service.GET("/gpstype/list", ox.getAllGpstype)
 
-	ox.service.POST("/history", ox.createHisory)
-	ox.service.PUT("/history/{id}", ox.updateHisory)
-	ox.service.DELETE("/history/{id}", ox.deleteHisoryById)
+	ox.service.Strict(
+		ox.service.POST("/history", ox.createHisory),
+		ox.service.PUT("/history/{id}", ox.updateHisory),
+		ox.service.DELETE("/history/{id}", ox.deleteHisoryById),
+	)
 
 	ox.service.GET("/history/view/{id}", ox.getHisoryById)
 	ox.service.GET("/history/list", ox.getAllHisory)
